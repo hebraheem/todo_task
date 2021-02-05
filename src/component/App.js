@@ -1,10 +1,10 @@
-import React from 'react'
-import Todo from './Todo'
+import React from "react";
+import Todo from "./Todo.jsx";
 
 function App() {
   return (
     <div>
-     <Todo/>
+      <Todo />
     </div>
   );
 }

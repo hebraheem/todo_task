@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((themes) => ({
+const useStyles = makeStyles(() => ({
   wrapper: {
     maxWidth: "400px",
     minHeight: "70vh",
@@ -9,6 +9,9 @@ const useStyles = makeStyles((themes) => ({
     background: "white",
     borderRadius: "10px",
     boxShadow: "2px 5px 5px rgba(0,0,0,0.5)",
+    "& > * + *": {
+      margin: "50px 50px",
+    },
   },
   form: {
     margin: "50px 50px",
@@ -16,7 +19,17 @@ const useStyles = makeStyles((themes) => ({
   input_field: {
     width: "60%",
     margin: "auto",
-    height: "30px",
+  },
+  btn: {
+    height: "40px",
+    backgroundColor: "lightBlue",
+    outline: "none",
+    border: "none",
+    borderRadius: "5px",
+    "&:hover": {
+      backgroundColor: "lightBlue",
+      color: "white",
+    },
   },
 }));
 
