@@ -6,7 +6,7 @@ const List = ({ list, handleClear, handleClick }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       {list.map((todo) => {
         return (
           <div key={todo.id} className={classes.list}>
@@ -16,7 +16,7 @@ const List = ({ list, handleClear, handleClick }) => {
         );
       })}
       {list.length > 0 && (
-        <Button variant="outlined" onClick={handleClear}>
+        <Button variant="outlined" size="small" onClick={handleClear}>
           Clear Todo
         </Button>
       )}
