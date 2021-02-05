@@ -37,29 +37,33 @@ function Todo() {
   };
 
   return (
-    <div className={classes.wrapper}>
-      {error.show && <Snack message={error.msg} severity={error.err} />}
-      <form onSubmit={handleSubmit} className={classes.form}>
-        <TextField
-          type="text"
-          label="Enter a todo"
-          name="todo"
-          className={classes.input_field}
-          value={input}
-          variant="outlined"
-          size="small"
-          autoComplete="false"
-          onChange={(e) => setInput(e.target.value)}
+    <>
+      <div className={classes.wrapper}>
+        {error.show && <Snack message={error.msg} severity={error.err} />}
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <TextField
+            type="text"
+            label="Enter a todo"
+            name="todo"
+            className={classes.input_field}
+            value={input}
+            variant="outlined"
+            size="small"
+            autoComplete="false"
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button className={classes.btn}>Add Todo</button>
+        </form>
+      {list.length > 0 && (
+        <List
+          list={list}
+          setList={setList}
+          handleClear={handleClear}
+          handleClick={handleClick}
         />
-        <button className={classes.btn}>Add Todo</button>
-      </form>
-      <List
-        list={list}
-        setList={setList}
-        handleClear={handleClear}
-        handleClick={handleClick}
-      />
-    </div>
+      )}
+      </div>
+    </>
   );
 }
 

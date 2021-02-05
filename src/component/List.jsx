@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
-import React from 'react'
-import useStyles from './listStyle'
+import React from "react";
+import useStyles from "./listStyle";
 
 const List = ({ list, handleClear, handleClick }) => {
   const classes = useStyles();
@@ -15,13 +15,11 @@ const List = ({ list, handleClear, handleClick }) => {
           </div>
         );
       })}
-      {list.length > 0 && (
-        <Button variant="outlined" size="small" onClick={handleClear}>
-          Clear Todo
-        </Button>
-      )}
+      <Button variant="outlined" size="small" onClick={handleClear}>
+        Clear Todo
+      </Button>
     </div>
   );
 };
 
-export default List
+export default List;

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
   wrapper: {
     maxWidth: "400px",
-    minHeight: "70vh",
+    minHeight: "20vh",
     borderTop: "10px lightBlue solid",
     margin: "100px auto",
     background: "white",
