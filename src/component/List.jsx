@@ -2,12 +2,8 @@ import { Button } from "@material-ui/core";
 import React from 'react'
 import useStyles from './listStyle'
 
-const List = ({ list, setList, handleClear }) => {
+const List = ({ list, handleClear, handleClick }) => {
   const classes = useStyles();
-  const handleClick = (id) => {
-    const filter = list.filter((list) => list.id !== id);
-    setList(filter);
-  };
 
   return (
     <div>

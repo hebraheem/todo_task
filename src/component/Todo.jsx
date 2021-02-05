@@ -1,28 +1,26 @@
 import { TextField, Button } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
 import useStyles from "./todoStyle";
 import List from "./List";
-import Snack from "./Snack.jsx";
 
 function Todo() {
   const classes = useStyles();
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
-  const [error, setError] = useState({ msg: "", error: "", show: false });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!input) {
-      return setError({
-        msg: "connot add an empty field",
-        error: "error",
-        show: true,
-      });
+      return alert("cannot add an empty field")
     }
     setList([...list, { input, id: new Date().getTime().toString() }]);
     setInput("");
   };
+  
+    const handleClick = (id) => {
+      const filter = list.filter((list) => list.id !== id);
+      setList(filter);
+    };
 
     const handleClear = () => {
       setList("");
@@ -30,7 +28,6 @@ function Todo() {
 
   return (
     <div className={classes.wrapper}>
-      {error.show && <Snack severity={error.status} message={error.message} />}
       <form onSubmit={handleSubmit} className={classes.form}>
         <TextField
           type="text"
@@ -45,7 +42,12 @@ function Todo() {
         />
         <button className={classes.btn}>Add Todo</button>
       </form>
-      <List list={list} setList={setList} handleClear={handleClear} />
+      <List
+        list={list}
+        setList={setList}
+        handleClear={handleClear}
+        handleClick={handleClick}
+      />
     </div>
   );
 }
