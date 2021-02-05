@@ -23,7 +23,7 @@ function Todo() {
     };
 
     const handleClear = () => {
-      setList("");
+      setList([]);
     };
 
   return (
