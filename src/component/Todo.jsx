@@ -24,6 +24,7 @@ function Todo() {
       setList(
         list.map((item) => {
           if (item.id === editId) return { ...item, input };
+          return item
         })
       );
       setInput("");
