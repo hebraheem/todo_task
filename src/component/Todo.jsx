@@ -8,16 +8,26 @@ function Todo() {
   const classes = useStyles();
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
+  const [isEditing, setIseditting] = useState(false);
+  const [editId, setEditId] = useState("");
   const [error, setError] = useState({ msg: "", err: "", show: false });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!input) {
-      (setError({
+      setError({
         msg: "cannot add an empty field",
         err: "error",
         show: true,
-      }));
+      });
+    } else if (input && isEditing) {
+      setList(
+        list.map((item) => {
+          if (item.id === editId) return { ...item, input };
+        })
+      );
+      setInput("");
+      setIseditting(false);
     } else {
       setList([...list, { input, id: new Date().getTime().toString() }]);
       setError({ msg: "Todo added", err: "success", show: true });
@@ -36,10 +46,21 @@ function Todo() {
     setError({ msg: "Todo cleared", err: "error", show: true });
   };
 
+  const handleEdit = (id) => {
+    let editList = list.find((list) => list.id === id);
+    setIseditting(true);
+    setEditId(id);
+    setInput(editList.input);
+  };
+
+  const showAlert = (msg = "", err = "", show = false) => {
+    setError({ msg, err, show });
+  };
+
   return (
     <>
       <div className={classes.wrapper}>
-        {error.show && <Snack message={error.msg} severity={error.err} />}
+        {error.show && <Snack {...error} removeAlert={showAlert} list={list} />}
         <form onSubmit={handleSubmit} className={classes.form}>
           <TextField
             type="text"
@@ -52,16 +73,19 @@ function Todo() {
             autoComplete="false"
             onChange={(e) => setInput(e.target.value)}
           />
-          <button className={classes.btn}>Add Todo</button>
+          <button className={classes.btn}>
+            {isEditing ? "Edit Todo" : "Add Todo"}
+          </button>
         </form>
-      {list.length > 0 && (
-        <List
-          list={list}
-          setList={setList}
-          handleClear={handleClear}
-          handleClick={handleClick}
-        />
-      )}
+        {list.length > 0 && (
+          <List
+            list={list}
+            setList={setList}
+            handleClear={handleClear}
+            handleClick={handleClick}
+            handleEdit={handleEdit}
+          />
+        )}
       </div>
     </>
   );
