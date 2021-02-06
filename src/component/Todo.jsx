@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import useStyles from "./todoStyle";
 import List from "./List";
@@ -35,7 +35,14 @@ function Todo() {
       setInput("");
     }
   };
-
+  
+  const handleEdit = (id) => {
+    let editList = list.find((list) => list.id === id);
+    setIseditting(true);
+    setEditId(id);
+    setInput(editList.input);
+  };
+  
   const handleClick = (id) => {
     const filter = list.filter((list) => list.id !== id);
     setList(filter);
@@ -47,12 +54,6 @@ function Todo() {
     setError({ msg: "Todo cleared", err: "error", show: true });
   };
 
-  const handleEdit = (id) => {
-    let editList = list.find((list) => list.id === id);
-    setIseditting(true);
-    setEditId(id);
-    setInput(editList.input);
-  };
 
   return (
     <>
@@ -70,14 +71,13 @@ function Todo() {
             autoComplete="false"
             onChange={(e) => setInput(e.target.value)}
           />
-          <button className={classes.btn}>
+          <Button type="submit" className={classes.btn}>
             {isEditing ? "Edit Todo" : "Add Todo"}
-          </button>
+          </Button>
         </form>
         {list.length > 0 && (
           <List
             list={list}
-            setList={setList}
             handleClear={handleClear}
             handleClick={handleClick}
             handleEdit={handleEdit}
