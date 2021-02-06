@@ -53,14 +53,10 @@ function Todo() {
     setInput(editList.input);
   };
 
-  const showAlert = (msg = "", err = "", show = false) => {
-    setError({ msg, err, show });
-  };
-
   return (
     <>
       <div className={classes.wrapper}>
-        {error.show && <Snack {...error} removeAlert={showAlert} list={list} />}
+        {error.show && <Snack severity={error.err} message={error.msg} />}
         <form onSubmit={handleSubmit} className={classes.form}>
           <TextField
             type="text"

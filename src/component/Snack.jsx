@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import { Snackbar } from "@material-ui/core";
 
-const Snack = ({ severity, message, removeAlert, list }) => {
-  React.useEffect(() => {
-    removeAlert();
-  }, [list]);
+const Snack = ({ severity, message }) => {
   const [open, setOpen] = useState(true);
   const vertical = "top";
   const horizontal = "center";
